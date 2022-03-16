@@ -1,6 +1,8 @@
-print("This is a test")
-print("This is the second change")
-def testFunction():
-    print("This is a test")
+import tkinter as tk
 
-testFunction()
+window = tk.Tk()
+
+window.attributes('-fullscreen', True)
+window.title("Project")
+
+window.mainloop()
