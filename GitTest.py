@@ -8,12 +8,8 @@ window.title("Project")
 button1 = tk.Button(window, text="Test button")
 button1.grid(row=0, column=0)
 
-<<<<<<< Updated upstream
 button2 = tk.Button(window, text="Quit", command =window.destroy)
 button2.grid(row=0, column=1)
-=======
-
->>>>>>> Stashed changes
 
 print("Change")
 print("Cecilia's change")
