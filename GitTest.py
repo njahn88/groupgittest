@@ -12,6 +12,7 @@ print("Change")
 <<<<<<< HEAD
 print("change 2")
 print("nathans change")
+print("Katie's change")
 =======
 >>>>>>> parent of 5ab49c5 (change 2)
 
