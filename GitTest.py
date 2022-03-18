@@ -9,5 +9,6 @@ button1 = tk.Button(window, text="Test button")
 button1.grid(row=0, column=0)
 
 print("Change")
+print("change 2")
 
 window.mainloop()
