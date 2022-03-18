@@ -10,4 +10,5 @@ button1.grid(row=0, column=0)
 
 print("Change")
 print("another change")
+print("My change")
 window.mainloop()
