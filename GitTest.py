@@ -10,5 +10,6 @@ button1.grid(row=0, column=0)
 
 print("Change")
 print("change 2")
+print("nathans change")
 
 window.mainloop()
