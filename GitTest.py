@@ -12,8 +12,5 @@ button2 = tk.Button(window, text="Quit", command =window.destroy)
 button2.grid(row=0, column=1)
 
 print("Change")
-print("Cecilia's change")
-print("Another change")
-print("hello")
-print("New change")
+
 window.mainloop()
