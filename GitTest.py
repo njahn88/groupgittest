@@ -31,21 +31,29 @@ class player:
         print(e.keysym)
         self.x = -5
         self.y = 0
+        self.canvas.after(100, self.noMove)
 
     def right(self, e):
         print(e.keysym)
         self.x = 5
         self.y = 0
+        self.canvas.after(100, self.noMove)
 
     def up(self, e):
         print(e.keysym)
         self.x = 0
         self.y = -5
+        self.canvas.after(100, self.noMove)
 
     def down(self, e):
         print(e.keysym)
         self.x = 0
         self.y = 5
+        self.canvas.after(100, self.noMove)
+
+    def noMove(self):
+        self.x = 0
+        self.y = 0
 
 #sets up the keybinds (arrow keys)
 def keySetup():
