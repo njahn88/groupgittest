@@ -28,25 +28,21 @@ class player:
         self.canvas.after(100, self.movement)
 
     def left(self, e):
-        print(e.keysym)
         self.x = -5
         self.y = 0
         self.canvas.after(100, self.noMove)
 
     def right(self, e):
-        print(e.keysym)
         self.x = 5
         self.y = 0
         self.canvas.after(100, self.noMove)
 
     def up(self, e):
-        print(e.keysym)
         self.x = 0
         self.y = -5
         self.canvas.after(100, self.noMove)
 
     def down(self, e):
-        print(e.keysym)
         self.x = 0
         self.y = 5
         self.canvas.after(100, self.noMove)
