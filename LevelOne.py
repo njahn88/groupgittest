@@ -72,7 +72,7 @@ class App:
         
         pygame.display.set_caption('Pygame pythonspot.com example')
         self._running = True
-        self._image_surf = pygame.image.load("player.jpg").convert()
+        self._image_surf = pygame.image.load("bulldog.png").convert()
         self._image_surf = pygame.transform.scale(self._image_surf, (30, 30))
         self._block_surf = pygame.image.load("block.png").convert()
         self._block_surf = pygame.transform.scale(self._block_surf, (35, 35))
