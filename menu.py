@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter.ttk import *
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 
 
 window = tk.Tk()
@@ -14,7 +14,7 @@ window.configure(bg = "#0B0B45")
 img = Image.open("wyly_level_9.png")
 new_img = img.resize((300,500))
 
-img = ImageTk.PhotoImage(new_img)
+#img = ImageTk.PhotoImage(new_img)
 
 
 label = tk.Label(window, image = img)
