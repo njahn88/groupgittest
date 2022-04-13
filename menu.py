@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter.ttk import *
+import Level1
 #from PIL import ImageTk, Image
 
 
@@ -11,18 +12,14 @@ window.geometry(f"{800}x{600}")
 window.title("Main Menu")
 window.configure(bg = "#0B0B45")
 
-img = Image.open("wyly_level_9.png")
-new_img = img.resize((300,500))
+img = tk.PhotoImage("wyly_level_9.png")
 
-#img = ImageTk.PhotoImage(new_img)
-
-
-label = tk.Label(window, image = img)
+label = tk.Label(window, image=img)
 label.place(x = 0, y = 100)
 
 def buttonSetUp():
 
-    levelOne = tk.Button(window, text = "Level 1", height = 2, width = 10, bg = "#ADD8E6" )
+    levelOne = tk.Button(window, text = "Level 1", height = 2, width = 10, bg = "#ADD8E6")
     levelOne.place(x = 350, y = 100)
     
     levelTwo = tk.Button(window, text = "Level 2", height = 2, width = 10, bg = "#ADD8E6" ) 
@@ -69,7 +66,6 @@ def buttonSetUp():
 
     levelSixteen = tk.Button(window, text = "Level 16", height = 2, width = 10, bg = "#ADD8E6" )
     levelSixteen.place(x = 500, y = 475)
-
 
 
 buttonSetUp()
