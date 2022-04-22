@@ -12,7 +12,7 @@ BLACK = (0,0,0)
 RED = (208,22,22)
 GREY = (107,107,107)
 WHITE = (225,225,225)
-PLAYER_COLOR = (190,194,15)
+PLAYER_COLOR = (0,98,255)
 
 # font settings
 START_FONT = 'arial black'
