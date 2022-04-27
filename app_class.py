@@ -148,7 +148,6 @@ class App:
         # will later be changed to joystick movement
         while self._running:
 
-
             if self.state == 'start':
                 self.start_events()
                 self.start_update()
