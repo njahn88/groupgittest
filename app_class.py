@@ -117,7 +117,7 @@ class App:
                 
     
     def playing_update(self):
-        self.player.update(self.screen)
+        self.player.update()
 
 
 
@@ -148,7 +148,6 @@ class App:
         # will later be changed to joystick movement
         while self._running:
 
-            self.timer(self.time)
 
             if self.state == 'start':
                 self.start_events()

@@ -1,11 +1,13 @@
 from pygame.math import Vector2 as vec
 
 # screen settings
-WIDTH, HEIGHT = 850, 650
+WIDTH, HEIGHT = 800, 600
 # Frames per second (clock)
-FPS = 100
-TOP_BOTTOM_BUFFER = 50
-MAZE_WIDTH,MAZE_HEIGHT = WIDTH - TOP_BOTTOM_BUFFER, HEIGHT-TOP_BOTTOM_BUFFER
+FPS = 250
+
+MAZE_WIDTH,MAZE_HEIGHT = WIDTH, HEIGHT
+BUTTON_SIZE = (100,50)
+WYLY_SIZE = (300,500)
 
 # colour settings
 BLACK = (0,0,0)
