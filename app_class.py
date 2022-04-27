@@ -2,6 +2,10 @@ import pygame, sys
 from pygame.locals import *
 from settings import *
 from player_class import *
+from button import *
+import level_class as level
+
+
 
 pygame.init()
 vec = pygame.math.Vector2
@@ -15,12 +19,11 @@ class App:
         self.clock = pygame.time.Clock()
         self._running = True
         self.state = 'start'
-        self.cell_width = MAZE_WIDTH//21
-        self.cell_height = MAZE_HEIGHT//15
+        self.cell_width = WIDTH//21
+        self.cell_height = HEIGHT//15
         self.player = Player(self,PLAYER_START_POS)
         self.walls = []
-
-        self.load()
+        self.bones = []
         
 
 
@@ -40,17 +43,19 @@ class App:
             pos[0] = pos[0]-text_size[0]//2
         screen.blit(var_text,pos)
 
-    def load(self):
-        self.maze = pygame.image.load('maze_4.jpg')
-        self.maze = pygame.transform.scale(self.maze, (MAZE_WIDTH,MAZE_HEIGHT))
+    def load(self, maze, text):
+        self.maze = pygame.image.load(maze)
+        self.maze = pygame.transform.scale(self.maze, (WIDTH,HEIGHT))
 
         # opening walls file and creating walls list
         # with coords of walls
-        with open ('level_4.txt','r') as file:
+        with open (text,'r') as file:
             for yidx, line in enumerate(file):
                 for xidx, char in enumerate(line):
                     if char == '1':
                         self.walls.append(vec(xidx,yidx))
+                    elif char == '2':
+                        self.bones.append(vec(xidx,yidx))
 
 
     def draw_grid(self):
@@ -63,23 +68,29 @@ class App:
             pygame.draw.rect(self.maze, (112, 55, 163), (wall.x*self.cell_width, wall.y*self.cell_height,
             self.cell_width, self.cell_height) )
 
-########################## start functions ############################
+########################## start functions ###########################
 
     def start_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self._running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            if event.type == KEYDOWN and event.key == K_SPACE:
                 self.state = 'playing'
+        pygame.display.update()
     
     def start_update(self):
         pass
+    
+
 
     def start_draw(self):
-        self.screen.fill(BLACK)
-        self.draw_text('Menu',self.screen,[WIDTH//2,HEIGHT//2],
-        START_TEXT_SIZE, (255,255,255), START_FONT, centered = True)
-        pygame.display.update()
+            
+
+            self.draw_text('Menu',self.screen,[WIDTH//2,HEIGHT//2],
+            START_TEXT_SIZE, (255,255,255), START_FONT, centered = True)
+
+
+            pygame.display.update()
 
 ############################### playing functions ###############################
     def playing_events(self):
@@ -103,17 +114,24 @@ class App:
  
                 if (keys[K_ESCAPE]):
                     self._running = False
+                
     
     def playing_update(self):
-        self.player.update()
+        self.player.update(self.screen)
+
+
 
     def playing_draw(self):
+        # counter = counter[len(counter)-2]
+        self.load('maze_4.jpg','level_4.txt')
         self.screen.fill(BLACK)
-        self.screen.blit(self.maze, (TOP_BOTTOM_BUFFER//2,TOP_BOTTOM_BUFFER//2))
+        self.screen.blit(self.maze,(0,0))
         #self.draw_grid()
         self.draw_text(f'Current Score: {0}', self.screen, [60,1], 18, WHITE, START_FONT)
         self.draw_text(f'High Score: {0}', self.screen, [(WIDTH//2)+60,1], 18, WHITE, START_FONT)
-        self.player.draw()
+        # self.draw_text(str(counter), self.screen, [60,560], 18, WHITE, START_FONT)
+        self.player.draw(self.screen)
+
         pygame.display.update()
 
 ###################################################################################
@@ -129,6 +147,8 @@ class App:
         # Sets keys for player movement
         # will later be changed to joystick movement
         while self._running:
+
+            self.timer(self.time)
 
             if self.state == 'start':
                 self.start_events()
