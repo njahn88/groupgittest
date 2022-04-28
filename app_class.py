@@ -1,3 +1,4 @@
+from tkinter import CURRENT
 import pygame, sys
 from pygame.locals import *
 from settings import *
@@ -19,11 +20,14 @@ class App:
         self.clock = pygame.time.Clock()
         self._running = True
         self.state = 'start'
+        self.level = 0
+        self.player_pos = level_objects[self.level].start_pos
         self.cell_width = WIDTH//21
         self.cell_height = HEIGHT//15
         self.player = Player(self,PLAYER_START_POS)
         self.walls = []
         self.bones = []
+        
         
 
 
@@ -44,6 +48,8 @@ class App:
         screen.blit(var_text,pos)
 
     def load(self, maze, text):
+        self.walls.clear()
+        self.bones.clear()
         self.maze = pygame.image.load(maze)
         self.maze = pygame.transform.scale(self.maze, (WIDTH,HEIGHT))
 
@@ -101,19 +107,28 @@ class App:
                 keys = pygame.key.get_pressed()
             
                 if (keys[K_LEFT]):
-                    self.player.move(vec(-1,0))
+                    self.player.move(vec(-PLAYER_SPEED,0))
  
                 if (keys[K_RIGHT]):
-                    self.player.move(vec(1,0))
+                    self.player.move(vec(PLAYER_SPEED,0))
  
                 if (keys[K_UP]):
-                    self.player.move(vec(0,-1))
+                    self.player.move(vec(0,-PLAYER_SPEED))
  
                 if (keys[K_DOWN]):
-                    self.player.move(vec(0,1))
+                    self.player.move(vec(0,PLAYER_SPEED))
  
                 if (keys[K_ESCAPE]):
                     self._running = False
+                
+                if self.player.next_level():
+                    self.level += 1
+                    self.player = Player(self, level_objects[self.level].start_pos)
+
+                    
+                    
+
+                
                 
     
     def playing_update(self):
@@ -122,14 +137,15 @@ class App:
 
 
     def playing_draw(self):
-        # counter = counter[len(counter)-2]
-        self.load('maze_4.jpg','level_4.txt')
+
+        CURRENT_LEVEL = level_objects[self.level]
+            
         self.screen.fill(BLACK)
+        self.load(CURRENT_LEVEL.level_img,CURRENT_LEVEL.text_file)
         self.screen.blit(self.maze,(0,0))
         #self.draw_grid()
         self.draw_text(f'Current Score: {0}', self.screen, [60,1], 18, WHITE, START_FONT)
         self.draw_text(f'High Score: {0}', self.screen, [(WIDTH//2)+60,1], 18, WHITE, START_FONT)
-        # self.draw_text(str(counter), self.screen, [60,560], 18, WHITE, START_FONT)
         self.player.draw(self.screen)
 
         pygame.display.update()
@@ -158,8 +174,9 @@ class App:
                 self.playing_draw()
             else:
                 self._running = False
-
             self.clock.tick(FPS)
+
+            
  
         self.on_cleanup()
 

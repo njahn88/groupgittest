@@ -1,6 +1,6 @@
 import pygame
 
-from settings import BUTTON_SIZE, WYLY_SIZE
+
 
 
 class Button():
@@ -18,7 +18,6 @@ class Button():
 
 
 	def update(self, screen):
-		self.image = pygame.transform.scale(self.image, BUTTON_SIZE)
 		# self.wyly = pygame.transform.scale(self.wyly, WYLY_SIZE)
 		screen.blit(self.image, self.rect)
 		# screen.blit(self.wyly, self.wyly_rect)

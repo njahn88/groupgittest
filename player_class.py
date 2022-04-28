@@ -1,6 +1,6 @@
 
 import pygame
-from settings import *
+import settings as set
 vec = pygame.math.Vector2
 
 class Player:
@@ -19,6 +19,20 @@ class Player:
                 if self.stored_direction != None:
                     self.direction = self.stored_direction
                 self.able_to_move = self.can_move()
+        if self.can_power_up():
+            set.PLAYER_SPEED += 50
+            print(set.PLAYER_SPEED)
+        if self.next_level():
+            self.draw(self.app.screen)
+        if self.previous_level():
+            self.draw(self.app.screen)
+            
+            
+    
+        # if self.can_change_level():
+        #     set.CURRENT_LEVEL = 'Level 3'
+    
+        
 
         # setting grid position in reference to pixel position
         self.grid_pos[0] = ((self.pix_pos[0]-self.app.cell_width//2)//self.app.cell_width+1)
@@ -27,7 +41,7 @@ class Player:
     def draw(self, screen):
 
         player = pygame.image.load('bulldog.png')
-        player = pygame.transform.scale(player, (self.app.cell_width, self.app.cell_height))
+        player = pygame.transform.scale(player, (self.app.cell_width-1, self.app.cell_height-1))
         screen.blit(player, self.pix_pos)
         # pygame.draw.circle(self.app.screen, PLAYER_COLOR, self.pix_pos, self.app.cell_width//2-2 )
 
@@ -41,7 +55,7 @@ class Player:
 
     def get_pix_pos(self):
         return vec((self.grid_pos.x *self.app.cell_width)- self.app.cell_width//2,
-         (self.grid_pos.y * self.app.cell_height)  - self.app.cell_height//10)
+         (self.grid_pos.y * self.app.cell_height)  - self.app.cell_height)
 
     def time_to_move(self):
         if int(self.pix_pos.x) % self.app.cell_width == 0:
@@ -56,8 +70,21 @@ class Player:
             if vec(self.grid_pos+self.direction) == wall:
                 return False
         return True
+
+    def can_power_up(self):
+        for bone in self.app.bones:
+            if vec(self.grid_pos+self.direction) == bone:
+                return True
+        return False
+
+    def next_level(self):
+        if self.grid_pos[0] > 21 or self.grid_pos[1] > 15:
+            print(True)
+            return True
+        return False
     
-    def can_change_level(self):
-        if self.pix_pos == vec(3,1):
+    def previous_level(self):
+        if self.grid_pos[0] < 0 or self.grid_pos[1] < 0:
+            print(True)
             return True
         return False
