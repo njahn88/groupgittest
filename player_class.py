@@ -11,6 +11,8 @@ class Player:
         self.direction = vec(1,0)
         self.stored_direction = None
         self.able_to_move = True
+        self.lives = 5
+
 
     def update(self):
         if self.able_to_move:
@@ -19,18 +21,13 @@ class Player:
                 if self.stored_direction != None:
                     self.direction = self.stored_direction
                 self.able_to_move = self.can_move()
-        if self.can_power_up():
-            set.PLAYER_SPEED += 50
-            print(set.PLAYER_SPEED)
-        if self.next_level():
-            self.draw(self.app.screen)
+        # if self.can_power_up():
+        #     set.PLAYER_SPEED += 50
+        # if self.next_level():
+        #     self.draw(self.app.screen)
         if self.previous_level():
-            self.draw(self.app.screen)
-            
-            
-    
-        # if self.can_change_level():
-        #     set.CURRENT_LEVEL = 'Level 3'
+            self.direction = (1,0)
+
     
         
 
@@ -43,6 +40,10 @@ class Player:
         player = pygame.image.load('bulldog.png')
         player = pygame.transform.scale(player, (self.app.cell_width-1, self.app.cell_height-1))
         screen.blit(player, self.pix_pos)
+
+        # drawing player lives
+        for x in range(self.lives):
+            pygame.draw.circle(self.app.screen, set.PLAYER_COLOR, (20 + 18*x, set.HEIGHT -15), 8)
         # pygame.draw.circle(self.app.screen, PLAYER_COLOR, self.pix_pos, self.app.cell_width//2-2 )
 
         # drawing the grid_pos rectangle
@@ -59,10 +60,10 @@ class Player:
 
     def time_to_move(self):
         if int(self.pix_pos.x) % self.app.cell_width == 0:
-            if self.direction == vec(1,0) or self.direction == vec (-1,0):
+            if self.direction == vec(1,0) or self.direction == vec (-1,0) or self.direction == vec(0,0):
                 return True
         if int(self.pix_pos.y) % self.app.cell_height == 0:
-            if self.direction == vec(0,1) or self.direction == vec (0,-1):
+            if self.direction == vec(0,1) or self.direction == vec (0,-1) or self.direction == vec(0,0):
                 return True
        
     def can_move(self):
@@ -78,13 +79,12 @@ class Player:
         return False
 
     def next_level(self):
-        if self.grid_pos[0] > 21 or self.grid_pos[1] > 15:
+        if self.grid_pos[0] > 20 or self.grid_pos[1] > 14:
             print(True)
             return True
         return False
     
     def previous_level(self):
         if self.grid_pos[0] < 0 or self.grid_pos[1] < 0:
-            print(True)
             return True
         return False

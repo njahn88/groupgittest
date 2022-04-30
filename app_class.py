@@ -1,10 +1,10 @@
-from tkinter import CURRENT
 import pygame, sys
 from pygame.locals import *
 from settings import *
 from player_class import *
-from button import *
-import level_class as level
+from enemy_class import *
+from new_menu import *
+
 
 
 
@@ -19,14 +19,17 @@ class App:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.clock = pygame.time.Clock()
         self._running = True
-        self.state = 'start'
+        self.state = 'playing'
         self.level = 0
-        self.player_pos = level_objects[self.level].start_pos
         self.cell_width = WIDTH//21
         self.cell_height = HEIGHT//15
-        self.player = Player(self,PLAYER_START_POS)
+        self.p_pos = vec(level_objects[self.level].start_pos[0],level_objects[self.level].start_pos[1])
+        self.player = Player(self,self.p_pos)
+        self.enemy = Enemy(self, level_objects[self.level].enemy_pos)
         self.walls = []
         self.bones = []
+        self.menu = Menu(self)
+
         
         
 
@@ -62,6 +65,7 @@ class App:
                         self.walls.append(vec(xidx,yidx))
                     elif char == '2':
                         self.bones.append(vec(xidx,yidx))
+        
 
 
     def draw_grid(self):
@@ -107,23 +111,28 @@ class App:
                 keys = pygame.key.get_pressed()
             
                 if (keys[K_LEFT]):
-                    self.player.move(vec(-PLAYER_SPEED,0))
+                    self.player.move(vec(-1,0))
  
                 if (keys[K_RIGHT]):
-                    self.player.move(vec(PLAYER_SPEED,0))
+                    self.player.move(vec(1,0))
  
                 if (keys[K_UP]):
-                    self.player.move(vec(0,-PLAYER_SPEED))
+                    self.player.move(vec(0,-1))
  
                 if (keys[K_DOWN]):
-                    self.player.move(vec(0,PLAYER_SPEED))
+                    self.player.move(vec(0,1))
  
                 if (keys[K_ESCAPE]):
                     self._running = False
+            if self.enemy.grid_pos[0] == self.player.grid_pos[0] or self.enemy.grid_pos[1] == self.player.grid_pos[1]:
+                self.player.lives -= 1
+                if self.player.lives == 0:
+                    self.state = 'game over'
+                pygame.display.update()
                 
-                if self.player.next_level():
-                    self.level += 1
-                    self.player = Player(self, level_objects[self.level].start_pos)
+
+
+                
 
                     
                     
@@ -132,13 +141,33 @@ class App:
                 
     
     def playing_update(self):
+
+
+        if self.player.next_level():
+            self.level += 1
+            if self.level in range(14):
+                self.player.direction = vec(1,0)
+                self.player.grid_pos = level_objects[self.level].start_pos
+                self.player.pix_pos = self.player.get_pix_pos()
+                self.enemy.grid_pos = level_objects[self.level].enemy_pos
+                self.enemy.pix_pos = self.enemy.get_pix_pos()
+                self.enemy.target = self.player.grid_pos
+            else:
+                self.state = 'game over'
         self.player.update()
+        self.enemy.update()
+
+        pygame.display.update()
+        
 
 
 
     def playing_draw(self):
+        
+
 
         CURRENT_LEVEL = level_objects[self.level]
+
             
         self.screen.fill(BLACK)
         self.load(CURRENT_LEVEL.level_img,CURRENT_LEVEL.text_file)
@@ -147,8 +176,38 @@ class App:
         self.draw_text(f'Current Score: {0}', self.screen, [60,1], 18, WHITE, START_FONT)
         self.draw_text(f'High Score: {0}', self.screen, [(WIDTH//2)+60,1], 18, WHITE, START_FONT)
         self.player.draw(self.screen)
+        self.enemy.draw()
 
+     
+    
         pygame.display.update()
+
+
+    # def remove_life(self):
+
+        
+    #     self.player.lives -= 1
+    #     if self.player.lives == 0:
+    #         pass
+            # self.state = 'game over'
+        # # self.player.grid_pos = level_objects[self.level].start_pos
+        # # self.player.pix_pos = self.player.get_pix_pos()
+        # self.player = Player(self, self.p_pos)
+        # self.player.grid_pos = self.p_pos
+        # self.player.pix_pos = self.player.get_pix_pos()
+        # print(self.p_pos)
+
+
+       
+        
+
+       
+
+
+            
+
+
+            
 
 ###################################################################################
 
@@ -165,13 +224,14 @@ class App:
         while self._running:
 
             if self.state == 'start':
-                self.start_events()
-                self.start_update()
-                self.start_draw()
+                self.menu.main_menu()
             elif self.state == 'playing':
                 self.playing_events()
                 self.playing_update()
                 self.playing_draw()
+            elif self.state == 'game over':
+                self.menu.maze1()
+                self._running = False
             else:
                 self._running = False
             self.clock.tick(FPS)
