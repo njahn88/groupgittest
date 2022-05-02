@@ -28,7 +28,7 @@ class Menu:
 
     def main_menu(self):
         while True:
-            bg = pygame.image.load('menu\wyly_0.PNG')
+            bg = pygame.image.load('menu/wyly_0.PNG')
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
 
@@ -62,7 +62,7 @@ class Menu:
     def lvl1(self):
         running = True
         while running:
-            bg = pygame.image.load("menu\lvl1.PNG")
+            bg = pygame.image.load('menu\lvl1.PNG')
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
 
@@ -951,7 +951,7 @@ class Menu:
     def maze1(self):
         running = True
         while running:
-            bg = pygame.image.load("menu\win_model.PNG")
+            bg = pygame.image.load("winscreen.jpg")
             screen.fill(BLACK)
             screen.blit(bg, (0, 0))
             
