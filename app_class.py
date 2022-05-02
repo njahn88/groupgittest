@@ -19,7 +19,7 @@ class App:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.clock = pygame.time.Clock()
         self._running = True
-        self.state = 'playing'
+        self.state = 'start'
         self.level = 0
         self.cell_width = WIDTH//21
         self.cell_height = HEIGHT//15
