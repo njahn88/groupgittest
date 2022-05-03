@@ -1004,6 +1004,14 @@ class Menu:
             bg = pygame.image.load("menu\win.PNG")
             screen.fill(BLACK)
             screen.blit(bg, (0, 0))
+
+            button_home = Button(base_image=pygame.image.load("menu\homeb.png"),
+            hovering_image=pygame.image.load("menu\homeb.png"),pos= (280,245))
+            button_home.update(screen)
+
+            button_exit = Button(base_image=pygame.image.load("menu\exitb.png"),
+            hovering_image=pygame.image.load("menu\exitb.png"),pos= (280,245))
+            button_exit.update(screen)
             
         #  draw_text('game', font, (255, 255, 255), screen, 20, 20)
             for event in pygame.event.get():
@@ -1013,6 +1021,13 @@ class Menu:
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         running = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if button_home.checkForInput(pygame.mouse.get_pos()):
+                        self.main_menu()
+                    if button_exit.checkForInput(pygame.mouse.get_pos()):
+                        pygame.quit()
+                        sys.exit()
+         
             
             pygame.display.update()
             mainClock.tick(60)
