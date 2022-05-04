@@ -75,15 +75,15 @@ class Menu:
             screen.blit(bg, (0, 0))
 
             button_play = Button(base_image=pygame.image.load("menu_bmp\playb.bmp"),
-            hovering_image=pygame.image.load("menu/playb.png"),pos= (400,245))
+            hovering_image=pygame.image.load("menu_bmp\playb.bmp"),pos= (400,245))
             button_play.update(screen)
 
             button_goback = Button(base_image=pygame.image.load("menu_bmp\gobackb.bmp"),
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu/extb.png"),
-            hovering_image=pygame.image.load("menu/extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
 
 
@@ -139,8 +139,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
 
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -202,8 +202,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -261,8 +261,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -320,8 +320,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -379,8 +379,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -438,8 +438,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -497,8 +497,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -555,8 +555,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -614,8 +614,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -674,8 +674,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -733,8 +733,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -792,8 +792,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -851,8 +851,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
@@ -910,8 +910,8 @@ class Menu:
             hovering_image=pygame.image.load("menu_bmp\gobackb.bmp"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu_bmp\extb.bmp"),
+            hovering_image=pygame.image.load("menu_bmp\extb.bmp"),pos= (390,345))
             button_next.update(screen)
             
             button_previous = Button(base_image=pygame.image.load("menu_bmp\prevb.bmp"),
