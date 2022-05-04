@@ -66,7 +66,11 @@ class App:
                     elif char == '2':
                         self.bones.append(vec(xidx,yidx))
         
-
+    def start_level(self):
+        self.player.grid_pos = level_objects[self.level].start_pos
+        self.player.pix_pos = self.player.get_pix_pos()
+        self.enemy.grid_pos = level_objects[self.level].enemy_pos
+        self.enemy.pix_pos = self.enemy.get_pix_pos()
 
     def draw_grid(self):
         for x in range(WIDTH//self.cell_width):
@@ -124,7 +128,7 @@ class App:
  
                 if (keys[K_ESCAPE]):
                     self._running = False
-            if self.enemy.grid_pos[0] == self.player.grid_pos[0] or self.enemy.grid_pos[1] == self.player.grid_pos[1]:
+            if self.enemy.grid_pos == self.player.grid_pos:
                 self.player.lives -= 1
                 if self.player.lives == 0:
                     self.state = 'game over'
@@ -132,9 +136,21 @@ class App:
                 
 
 
-                
+    def level_update(self):
+    
+        
+        if self.player.next_level():
 
+            self.menu.running = True
+            self.state = 'game over'
+            
+        
+
+            pygame.display.update()            
+        self.player.update()
+        self.enemy.update()
                     
+        pygame.display.update() 
                     
 
                 
@@ -164,8 +180,7 @@ class App:
 
     def playing_draw(self):
         
-
-
+        
         CURRENT_LEVEL = level_objects[self.level]
 
             
@@ -182,20 +197,6 @@ class App:
     
         pygame.display.update()
 
-
-    # def remove_life(self):
-
-        
-    #     self.player.lives -= 1
-    #     if self.player.lives == 0:
-    #         pass
-            # self.state = 'game over'
-        # # self.player.grid_pos = level_objects[self.level].start_pos
-        # # self.player.pix_pos = self.player.get_pix_pos()
-        # self.player = Player(self, self.p_pos)
-        # self.player.grid_pos = self.p_pos
-        # self.player.pix_pos = self.player.get_pix_pos()
-        # print(self.p_pos)
 
 
        
@@ -229,12 +230,17 @@ class App:
                 self.playing_events()
                 self.playing_update()
                 self.playing_draw()
+            elif self.state == 'play level':
+                self.playing_events()
+                self.level_update()
+                self.playing_draw()
             elif self.state == 'game over':
                 self.menu.maze1()
                 self._running = False
             else:
                 self._running = False
             self.clock.tick(FPS)
+            pygame.display.update()
 
             
  

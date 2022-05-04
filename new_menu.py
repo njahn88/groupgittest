@@ -15,6 +15,7 @@ class Menu:
 
     def __init__(self,app):
         self.app = app
+        self.running = True
 
     def draw_text(self,text, font, color, surface, x, y):
         textobj = font.render(text, 1, color)
@@ -27,8 +28,9 @@ class Menu:
     mx, my = pygame.mouse.get_pos()
 
     def main_menu(self):
-        while True:
-            bg = pygame.image.load('menu/wyly_0.PNG')
+
+        while self.running:
+            bg = pygame.image.load('menu\wyly_0.PNG')
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
 
@@ -102,7 +104,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                        self.maze1()
+                        self.app.level = 0
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -161,7 +166,10 @@ class Menu:
                         self.maze2()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 1
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -174,8 +182,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl3(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl3.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -218,7 +226,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 2
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -230,8 +241,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl4(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl4.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -274,7 +285,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 3
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -286,8 +300,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl5(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl5.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -330,7 +344,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 4
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -342,8 +359,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl6(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl6.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -386,7 +403,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 5
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -398,8 +418,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl7(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl7.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -442,7 +462,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 6
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -454,8 +477,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl8(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl8.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -498,7 +521,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 7
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -509,8 +535,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl9(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl9.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -553,7 +579,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 8
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -565,8 +594,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl10(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl10.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -609,7 +638,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                        self.maze1()
+                        self.app.level = 9
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -622,8 +654,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl11(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl11.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -666,7 +698,10 @@ class Menu:
                         self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                        self.maze1()
+                        self.app.level = 10
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -678,8 +713,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl12(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl12.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -722,7 +757,10 @@ class Menu:
                         self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                        self.maze1()
+                        self.app.level = 1
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -734,8 +772,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl13(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl13.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -778,7 +816,10 @@ class Menu:
                         self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                        self.maze1()
+                        self.app.level = 12
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -790,8 +831,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl14(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl14.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -834,7 +875,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 13
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -846,8 +890,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl15(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl15.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -890,7 +934,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 14
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_next.checkForInput(pygame.mouse.get_pos()):
@@ -902,8 +949,8 @@ class Menu:
             mainClock.tick(60)
 
     def lvl16(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\lvl16.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -939,7 +986,10 @@ class Menu:
                          self.maze1()
                 if event.type == MOUSEBUTTONDOWN:
                     if button_play.checkForInput(pygame.mouse.get_pos()):
-                         self.maze1()
+                        self.app.level = 15
+                        self.app.start_level()
+                        self.app.state = 'play level'
+                        self.running = False
                     if button_goback.checkForInput(pygame.mouse.get_pos()):
                         self.main_menu()
                     if button_previous.checkForInput(pygame.mouse.get_pos()):
@@ -949,9 +999,9 @@ class Menu:
             mainClock.tick(60)
 
     def maze1(self):
-        running = True
-        while running:
-            bg = pygame.image.load("winscreen.jpg")
+        self.running = True
+        while self.running:
+            bg = pygame.image.load("menu\win.PNG")
             screen.fill(BLACK)
             screen.blit(bg, (0, 0))
 
@@ -970,11 +1020,13 @@ class Menu:
                     sys.exit()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        running = False
+                        self.running = False 
                 if event.type == MOUSEBUTTONDOWN:
                     if button_home.checkForInput(pygame.mouse.get_pos()):
+                        self.running = False
                         self.main_menu()
                     if button_exit.checkForInput(pygame.mouse.get_pos()):
+                        self.running = False
                         pygame.quit()
                         sys.exit()
          
