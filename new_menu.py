@@ -28,7 +28,7 @@ class Menu:
     mx, my = pygame.mouse.get_pos()
 
     def main_menu(self):
-
+        self.running = True
         while self.running:
             bg = pygame.image.load('menu\wyly_0.PNG')
             screen.fill((0,0,0))
@@ -42,7 +42,9 @@ class Menu:
             self.draw_text('SPACE or RETURN key to go', font, (252, 3, 3), screen, 440, 440)
             self.draw_text('to selected level', font, (252, 3, 3), screen, 470, 470)
             
-
+            button_play = Button(base_image=pygame.image.load("menu/playb.png"),
+            hovering_image=pygame.image.load("menu/playb.png"),pos= (400,245))
+            button_play.update(screen)
 
             click = False
             for event in pygame.event.get():
@@ -55,15 +57,19 @@ class Menu:
                         sys.exit()
                 if event.type == KEYDOWN:
                     self.lvl1()
-                    click = True
+                    
+                if event.type == MOUSEBUTTONDOWN:
+                    if button_play.checkForInput(pygame.mouse.get_pos()):
+                        self.app.state = 'playing'
+                        self.running = False
 
 
             pygame.display.update()
             mainClock.tick(60)
 
     def lvl1(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load('menu/lvl1.PNG')
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -119,8 +125,8 @@ class Menu:
                 mainClock.tick(60)
 
     def lvl2(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu/lvl2.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
@@ -1006,7 +1012,7 @@ class Menu:
             screen.blit(bg, (0, 0))
 
             button_home = Button(base_image=pygame.image.load("menu\homeb.png"),
-            hovering_image=pygame.image.load("menu\homeb.png"),pos= (280,245))
+            hovering_image=pygame.image.load("menu\homeb.png"),pos= (390,245))
             button_home.update(screen)
 
             button_exit = Button(base_image=pygame.image.load("menu\exitb.png"),
@@ -1020,11 +1026,12 @@ class Menu:
                     sys.exit()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        self.running = False 
+                        self.main_menu()
+                        self.app.state = 'start'
                 if event.type == MOUSEBUTTONDOWN:
                     if button_home.checkForInput(pygame.mouse.get_pos()):
                         self.running = False
-                        self.main_menu()
+                        self.app.state = 'start'
                     if button_exit.checkForInput(pygame.mouse.get_pos()):
                         self.running = False
                         pygame.quit()

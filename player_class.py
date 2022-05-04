@@ -12,6 +12,7 @@ class Player:
         self.stored_direction = None
         self.able_to_move = True
         self.lives = 5
+        
 
 
     def update(self):
@@ -75,6 +76,12 @@ class Player:
     def can_power_up(self):
         for bone in self.app.bones:
             if vec(self.grid_pos+self.direction) == bone:
+                return True
+        return False
+
+    def is_hole(self):
+        for hole in self.app.holes:
+            if vec(self.grid_pos+self.direction) == hole:
                 return True
         return False
 
