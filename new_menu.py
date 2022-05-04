@@ -1,10 +1,10 @@
 import pygame, sys
 from button import *
-
+from pygame.locals import *
 from settings import *
 
 mainClock = pygame.time.Clock()
-from pygame.locals import *
+
 pygame.init()
 pygame.display.set_caption('menu')
 screen = pygame.display.set_mode((800, 600),0,32)
