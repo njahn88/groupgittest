@@ -62,20 +62,20 @@ class Menu:
     def lvl1(self):
         running = True
         while running:
-            bg = pygame.image.load('menu\lvl1.PNG')
+            bg = pygame.image.load('menu/lvl1.PNG')
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
 
-            button_play = Button(base_image=pygame.image.load("menu\playb.png"),
-            hovering_image=pygame.image.load("menu\playb.png"),pos= (400,245))
+            button_play = Button(base_image=pygame.image.load("menu/playb.png"),
+            hovering_image=pygame.image.load("menu/playb.png"),pos= (400,245))
             button_play.update(screen)
 
-            button_goback = Button(base_image=pygame.image.load("menu\gobackb.png"),
-            hovering_image=pygame.image.load("menu\gobackb.png"),pos= (280,245))
+            button_goback = Button(base_image=pygame.image.load("menu/gobackb.png"),
+            hovering_image=pygame.image.load("menu/gobackb.png"),pos= (280,245))
             button_goback.update(screen)
 
-            button_next = Button(base_image=pygame.image.load("menu\extb.png"),
-            hovering_image=pygame.image.load("menu\extb.png"),pos= (390,345))
+            button_next = Button(base_image=pygame.image.load("menu/extb.png"),
+            hovering_image=pygame.image.load("menu/extb.png"),pos= (390,345))
             button_next.update(screen)
 
 
@@ -116,7 +116,7 @@ class Menu:
     def lvl2(self):
         running = True
         while running:
-            bg = pygame.image.load("menu\lvl2.PNG")
+            bg = pygame.image.load("menu/lvl2.PNG")
             screen.fill((0,0,0))
             screen.blit(bg, (0, 0))
 
