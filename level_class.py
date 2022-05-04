@@ -5,7 +5,6 @@ from pygame.math import Vector2 as vec
 
 
 class Level():
-    w_img = pygame.image.load('no_Level.JPG')
     def __init__(self, text, level_img, text_file, start_pos, end_pos, enemy_pos):
         self.text = text
         self.level_img = level_img
