@@ -999,8 +999,8 @@ class Menu:
             mainClock.tick(60)
 
     def maze1(self):
-        running = True
-        while running:
+        self.running = True
+        while self.running:
             bg = pygame.image.load("menu\win.PNG")
             screen.fill(BLACK)
             screen.blit(bg, (0, 0))
@@ -1020,11 +1020,13 @@ class Menu:
                     sys.exit()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        running = False
+                        self.running = False 
                 if event.type == MOUSEBUTTONDOWN:
                     if button_home.checkForInput(pygame.mouse.get_pos()):
+                        self.running = False
                         self.main_menu()
                     if button_exit.checkForInput(pygame.mouse.get_pos()):
+                        self.running = False
                         pygame.quit()
                         sys.exit()
          

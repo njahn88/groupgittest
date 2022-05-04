@@ -128,7 +128,7 @@ class App:
  
                 if (keys[K_ESCAPE]):
                     self._running = False
-            if self.enemy.pix_pos == self.player.pix_pos:
+            if self.enemy.grid_pos == self.player.grid_pos:
                 self.player.lives -= 1
                 if self.player.lives == 0:
                     self.state = 'game over'
@@ -197,20 +197,6 @@ class App:
     
         pygame.display.update()
 
-
-    # def remove_life(self):
-
-        
-    #     self.player.lives -= 1
-    #     if self.player.lives == 0:
-    #         pass
-            # self.state = 'game over'
-        # # self.player.grid_pos = level_objects[self.level].start_pos
-        # # self.player.pix_pos = self.player.get_pix_pos()
-        # self.player = Player(self, self.p_pos)
-        # self.player.grid_pos = self.p_pos
-        # self.player.pix_pos = self.player.get_pix_pos()
-        # print(self.p_pos)
 
 
        
