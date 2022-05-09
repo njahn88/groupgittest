@@ -8,6 +8,7 @@ from new_menu import *
 
 
 
+
 pygame.init()
 vec = pygame.math.Vector2
 
@@ -28,11 +29,24 @@ class App:
         self.enemy = Enemy(self, level_objects[self.level].enemy_pos)
         self.walls = []
         self.bones = []
+        self.holes = []
         self.menu = Menu(self)
+        self.score = 0
+        self.highscore = self.readFile()
+        
 
         
         
+    def readFile(self,fileLocation = 'highscore.txt'):
+        # load high score
+        file = open(fileLocation, 'r')
+        return file.read()
 
+    def writeToFile(self,fileLocation, data):
+        file = open(fileLocation, 'w')
+        file.write(str(data))
+
+            
 
 
     # When player presses escape key the program stops
@@ -65,6 +79,8 @@ class App:
                         self.walls.append(vec(xidx,yidx))
                     elif char == '2':
                         self.bones.append(vec(xidx,yidx))
+                    elif char == 'X':
+                        self.holes.append(vec(xidx,yidx))
         
     def start_level(self):
         self.player.grid_pos = level_objects[self.level].start_pos
@@ -132,7 +148,9 @@ class App:
                 self.player.lives -= 1
                 if self.player.lives == 0:
                     self.state = 'game over'
+                
                 pygame.display.update()
+            
                 
 
 
@@ -188,12 +206,16 @@ class App:
         self.load(CURRENT_LEVEL.level_img,CURRENT_LEVEL.text_file)
         self.screen.blit(self.maze,(0,0))
         #self.draw_grid()
-        self.draw_text(f'Current Score: {0}', self.screen, [60,1], 18, WHITE, START_FONT)
-        self.draw_text(f'High Score: {0}', self.screen, [(WIDTH//2)+60,1], 18, WHITE, START_FONT)
+        self.draw_text(f'Current Score: {self.score}', self.screen, [60,1], 18, WHITE, START_FONT)
+        self.draw_text(f'High Score: {self.highscore}', self.screen, [(WIDTH//2)+60,1], 18, WHITE, START_FONT)
         self.player.draw(self.screen)
         self.enemy.draw()
 
-     
+        if self.player.can_power_up():
+                self.score += 1
+        if self.player.is_hole():
+                self.score -= 1
+       
     
         pygame.display.update()
 
@@ -235,6 +257,9 @@ class App:
                 self.level_update()
                 self.playing_draw()
             elif self.state == 'game over':
+                if self.score > int(self.highscore):
+                    self.writeToFile('highscore.txt', self.score)
+                    self.highscore = self.readFile()
                 self.menu.maze1()
                 self._running = False
             else:
