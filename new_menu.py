@@ -43,7 +43,7 @@ class Menu:
             self.draw_text('to selected level', font, (252, 3, 3), screen, 470, 470)
             
             button_play = Button(base_image=pygame.image.load("menu_bmp\playb.bmp"),
-            hovering_image=pygame.image.load("menu_bmp\playb.bmp"),pos= (400,245))
+            hovering_image=pygame.image.load("menu_bmp\playb.bmp"),pos= (100,245))
             button_play.update(screen)
 
             click = False
