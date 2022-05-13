@@ -19,7 +19,6 @@ RED = (208,22,22)
 GREY = (107,107,107)
 WHITE = (225,225,225)
 PURPLE = (70,29,124)
-PLAYER_COLOR = (0,98,255)
 
 # font settings
 START_FONT = 'arial black'

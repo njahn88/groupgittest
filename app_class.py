@@ -12,6 +12,7 @@ from new_menu import *
 pygame.init()
 vec = pygame.math.Vector2
 
+# Allows for game play given a state: "start", "playing", "play level"
 class App:
 
     
@@ -24,10 +25,12 @@ class App:
         self.level = 0
         self.cell_width = WIDTH//21
         self.cell_height = HEIGHT//15
+        
+        # Sets the player start position given the level
         self.p_pos = vec(level_objects[self.level].start_pos[0],level_objects[self.level].start_pos[1])
         self.player = Player(self,self.p_pos)
         self.enemy = Enemy(self, level_objects[self.level].enemy_pos)
-        self.walls = []
+        self.walls = [] 
         self.bones = []
         self.holes = []
         self.menu = Menu(self)
@@ -36,12 +39,13 @@ class App:
         
 
         
-        
+    # opens the highscore text file and returns it   
     def readFile(self,fileLocation = 'highscore.txt'):
         # load high score
         file = open(fileLocation, 'r')
         return file.read()
 
+    # resets the highscore file when the score goes above the current one
     def writeToFile(self,fileLocation, data):
         file = open(fileLocation, 'w')
         file.write(str(data))
@@ -56,6 +60,7 @@ class App:
 
 ########################## Helper functions ############################
 
+    # for drawing text anywhere in the game
     def draw_text(self, text, screen, pos, size, color, font_name, centered = False):
         font = pygame.font.SysFont(font_name, size)
         var_text = font.render(text, False, color)
@@ -64,6 +69,7 @@ class App:
             pos[0] = pos[0]-text_size[0]//2
         screen.blit(var_text,pos)
 
+    # takes the background image and sets it as self.maze 
     def load(self, maze, text):
         self.walls.clear()
         self.bones.clear()
@@ -76,53 +82,34 @@ class App:
             for yidx, line in enumerate(file):
                 for xidx, char in enumerate(line):
                     if char == '1':
-                        self.walls.append(vec(xidx,yidx))
+                        self.walls.append(vec(xidx,yidx))  # Builds a wall everywhere there is a 1 in the text file
                     elif char == '2':
-                        self.bones.append(vec(xidx,yidx))
+                        self.bones.append(vec(xidx,yidx)) # Adds a bone everywhere there is a 2 in the text file
                     elif char == 'X':
-                        self.holes.append(vec(xidx,yidx))
-        
+                        self.holes.append(vec(xidx,yidx)) # Adds an 'X' everywhere there is a 'X' in the text file
+
+    # sets the player position and enemy position based on the level chosen    
     def start_level(self):
         self.player.grid_pos = level_objects[self.level].start_pos
         self.player.pix_pos = self.player.get_pix_pos()
         self.enemy.grid_pos = level_objects[self.level].enemy_pos
         self.enemy.pix_pos = self.enemy.get_pix_pos()
 
-    def draw_grid(self):
-        for x in range(WIDTH//self.cell_width):
-            pygame.draw.line(self.maze, GREY, (x*self.cell_width,0), (x*self.cell_width, HEIGHT))
-        for x in range(HEIGHT//self.cell_height):
-            pygame.draw.line(self.maze, GREY, (0,x*self.cell_height), (WIDTH, x*self.cell_height))
+    # # draws a grid over the maze to make sure all the cells line up 
+    # def draw_grid(self):
+    #     for x in range(WIDTH//self.cell_width):
+    #         pygame.draw.line(self.maze, GREY, (x*self.cell_width,0), (x*self.cell_width, HEIGHT))
+    #     for x in range(HEIGHT//self.cell_height):
+    #         pygame.draw.line(self.maze, GREY, (0,x*self.cell_height), (WIDTH, x*self.cell_height))
 
-        for wall in self.walls:
-            pygame.draw.rect(self.maze, (112, 55, 163), (wall.x*self.cell_width, wall.y*self.cell_height,
-            self.cell_width, self.cell_height) )
-
-########################## start functions ###########################
-
-    def start_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self._running = False
-            if event.type == KEYDOWN and event.key == K_SPACE:
-                self.state = 'playing'
-        pygame.display.update()
-    
-    def start_update(self):
-        pass
-    
+    #     for wall in self.walls:
+    #         pygame.draw.rect(self.maze, (112, 55, 163), (wall.x*self.cell_width, wall.y*self.cell_height,
+    #         self.cell_width, self.cell_height) )
 
 
-    def start_draw(self):
-            
-
-            self.draw_text('Menu',self.screen,[WIDTH//2,HEIGHT//2],
-            START_TEXT_SIZE, (255,255,255), START_FONT, centered = True)
-
-
-            pygame.display.update()
 
 ############################### playing functions ###############################
+    # given player input allows player to move on the grid
     def playing_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -144,6 +131,8 @@ class App:
  
                 if (keys[K_ESCAPE]):
                     self._running = False
+            
+            # takes away a player life if the player and enemy collide
             if self.enemy.grid_pos == self.player.grid_pos:
                 self.player.lives -= 1
                 if self.player.lives == 0:
@@ -153,7 +142,8 @@ class App:
             
                 
 
-
+    # If in level mode, will end the game 
+    # when player reaches end of the maze
     def level_update(self):
     
         
@@ -162,7 +152,6 @@ class App:
             self.menu.running = True
             self.state = 'game over'
             
-        
 
             pygame.display.update()            
         self.player.update()
@@ -173,7 +162,7 @@ class App:
 
                 
                 
-    
+    # For ALL-THE-WAY-TO-THE-TOP mode, will send player to the next level when they reach the end of the maze.
     def playing_update(self):
 
 
@@ -195,9 +184,9 @@ class App:
         
 
 
-
+    # Draws the background image, the player, the enemy, 
+    # and the current score/high score on the screen
     def playing_draw(self):
-        
         
         CURRENT_LEVEL = level_objects[self.level]
 
@@ -211,6 +200,8 @@ class App:
         self.player.draw(self.screen)
         self.enemy.draw()
 
+        # checks if player has passed a bone or hole 
+        # and updates their score accordingly
         if self.player.can_power_up():
                 self.score += 1
         if self.player.is_hole():
@@ -232,7 +223,7 @@ class App:
 
             
 
-###################################################################################
+##################################### Run ###########################################
 
  
     def on_cleanup(self):
@@ -245,17 +236,20 @@ class App:
         # Sets keys for player movement
         # will later be changed to joystick movement
         while self._running:
-
+            # displays the menu
             if self.state == 'start':
                 self.menu.main_menu()
+            # starts ALL-THE-WAY-TO-THE-TOP mode
             elif self.state == 'playing':
                 self.playing_events()
                 self.playing_update()
                 self.playing_draw()
+            # Plays the level the player chose
             elif self.state == 'play level':
                 self.playing_events()
                 self.level_update()
                 self.playing_draw()
+            # Displays win or lose screen
             elif self.state == 'game over':
                 if self.score > int(self.highscore):
                     self.writeToFile('highscore.txt', self.score)

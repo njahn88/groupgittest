@@ -14,7 +14,7 @@ class Enemy:
         self.direction = vec(1,0)
         self.target = None
         
-
+    # resets the enemy target as the player position
     def update(self):
         self.target = self.app.player.grid_pos
         if self.target != self.grid_pos:
@@ -27,24 +27,28 @@ class Enemy:
         self.grid_pos[0] = ((self.pix_pos[0]-self.app.cell_width//2)//self.app.cell_width+1)
         self.grid_pos[1] = ((self.pix_pos[1]-self.app.cell_height//2)//self.app.cell_height+1)
 
-
+    # draws enemy to the screen
     def draw(self):
 
         pygame.draw.circle(self.app.screen, PURPLE, (int(self.pix_pos.x),int(self.pix_pos.y)), self.radius)
 
+    # Gets pixel position 
     def get_pix_pos(self):
         return vec((self.grid_pos.x *self.app.cell_width)- self.app.cell_width//2,
          (self.grid_pos.y * self.app.cell_height)  - self.app.cell_height//2)
 
+    # resets the enemy direction based on player position
     def move(self):
         self.direction = self.get_path_direction(self.target)
     
+    # Retruns vector of the player position
     def get_path_direction(self,target):
         next_cell = self.find_next_cell(target)
         x_dir = next_cell[0] - self.grid_pos[0]
         y_dir = next_cell[1] - self.grid_pos[1]
         return vec(x_dir, y_dir)
     
+    # Uses Breadth-First Search to search for the player position
     def find_next_cell(self,target):
         path = self.BFS([int(self.grid_pos.x), int(self.grid_pos.y)],
          [int(target[0]), int(target[1])])
@@ -52,14 +56,17 @@ class Enemy:
 
         return path[1]
     
+    # Searches for the player while on the grid
     def BFS(self,start,target):
         grid = [[0 for x in range(21)] for x in range(15)]
         for cell in self.app.walls:
             if cell.x < 21 and cell.y < 15:
                 grid[int(cell.y)][int(cell.x)] = 1
+        # Adds the player position to the path
         queue = [start]
         path = []
         visited = []
+        # removes position from queue when it is being visited
         while queue:
             current = queue[0]
             queue.remove(queue[0])
@@ -67,6 +74,7 @@ class Enemy:
             if current == target:
                 break
             else:
+                # makes sure the player doesn't go off the grid
                 neighbors = [[0,-1],[1,0],[0,1],[-1,0]]
                 for n in neighbors:
                     if n[0]+ current[0] >= 0 and n[0]+ current[0] < len(grid[0]):
@@ -82,27 +90,11 @@ class Enemy:
                 if step["Next"]== target:
                     target = step["Current"]
                     shortest.insert(0,step["Current"]) 
+        # returns the shortest path the enemy can take to get to the player
         return shortest                  
 
-    # def get_random_direction(self):
-    #     while True:
-    #         number = random.randint(-2,1)
-    #         if number == -2:
-    #             x_dir, y_dir = 1,0
-    #         elif number == -1:
-    #             x_dir, y_dir = 0,1
-    #         elif number == 0:
-    #             x_dir, y_dir = -1,0
-    #         else:
-    #             x_dir, y_dir = 0,-1
-    #         next_pos = vec(self.grid_pos.x+x_dir, self.grid_pos.y+y_dir)
-    #         if next_pos not in self.app.walls:
-    #             break
-    #         # if vec(dir.x+x_dir, dir.y+y_dir) in self.app.walls:
-    #         #     break
-    #     return vec(x_dir,y_dir)
 
-
+    # makes sure the enemy moves within the grid rules
     def time_to_move(self):
         if int(self.pix_pos.x-self.radius) % self.app.cell_width == 0:
             if self.direction == vec(1,0) or self.direction == vec (-1,0) or self.direction == vec(0,0):

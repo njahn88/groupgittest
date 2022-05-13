@@ -7,13 +7,13 @@ from pygame.math import Vector2 as vec
 class Level():
     def __init__(self, text, level_img, text_file, start_pos, end_pos, enemy_pos):
         self.text = text
-        self.level_img = level_img
-        self.text_file = text_file
+        self.level_img = level_img 
+        self.text_file = text_file 
         self.start_pos = start_pos
         self.end_pos = end_pos
         self.enemy_pos = enemy_pos
 
-        
+# All levels as objects so attributes can be called more easily        
 
 L1 = Level("Level 1", 'maze_bmp\maze.001.bmp', 'Level_1.txt', vec(0,12), vec(20,2) , vec(10,3))
 L2 = Level("Level 2", 'maze_bmp\maze.002.bmp', 'Level_2.txt', vec(0,2), vec(20,14), vec(6,4))
